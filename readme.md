@@ -1,8 +1,19 @@
-# Amazon Assignment
+# Clipboard Amazon Assignment
 
-### Notes
-I have used amazon.in and chocalate as Rocho Ferrero. 
-I cannot choose Mars & Bounty and Amazon.com because of the error message shown by amazon due to location
+#Initial framework setup pulled from Amuthansakthivel(Staff Software Engineer - TestOps - Clipboard Health). 
+#Based on the ideas and learning from his youtube video automated this assignment
+
+### Assignment test cases and checklist
+Validate “AboutThisItem” section presence in second highest priced item
+1. Open https://www.amazon.in/. Note: Clicking on above URL may redirect you to amazon.com. Change it to amazon.in
+2. Click on the hamburger menu in the top left corner.
+3. Scroll own and then Click on the TV, Appliances and Electronics link under shop by Department section.
+4. Then click on Televisions under Tv, Audio & Cameras sub section.
+5. Scroll down and filter the results by Brand ‘Samsung’.
+6. Sort the Samsung results with price High to Low.
+7. Click on the second highest priced item (whatever that maybe at the time of automating).
+8. Switch the Window
+9. Assert that “About this item” section is present and log this section text to console/report.
 
 ## Libraries Used :
 
@@ -23,6 +34,7 @@ I cannot choose Mars & Bounty and Amazon.com because of the error message shown 
 4. Configuration can be changed from config.properties inside src/test/resources
 5. Utility methods available for Web Interactions *(SeleniumActions.java)*
 6. Integration with Jenkins for scheduling is easy. :raising_hand:
+7. Can be integrated with Jenkins and docker execution can be done
 
 ## Adding more tests :
 
@@ -52,83 +64,8 @@ Prerequisites: Java 8+ , Maven 3.6.3 Installed and path set
 
 Note : User should not try to run the test from test class - Might end up in NPE. Because the listeners are configured only in testng.xml
 
-## Report Interpretation :
-
-1. Dashboard view clearly indicates the start time, end time of the run, number of tests passed and failed. It also
-   shows the time took for the individual tests in form of timeline. Hover the mouse over the timeline to get the exact
-   time details.
-![img.png](readmeimages/img6.png)
-2. Tags tab in the Dashboard view clearly indicates the pass and fail according to the functionality.
-3. Click on each test tab to view the corresponding test log events.
-4. All the web tests will have a screenshot attached on failure
-5. After each test run, reports can be found under root directory and ExtentReports folder.
-6. Press "l" on the keyboard after opening the report to switch the theme to Standard.
-![img.png](readmeimages/img7.png)
-
-## Jenkins Integration :
-
-1. This project can be integrated easily with Jenkins.
-2. Login to Jenkins
-3. Create Maven Project(Add maven plugin if not present)
-![img.png](readmeimages/img.png)
-4. Configure choice parameters to run different maven profiles
-![img_1.png](readmeimages/img_1.png)
-5. Configure goal and options
-![img_2.png](readmeimages/img_2.png)
-6. Choose custom workspace and give the project location
-![img_3.png](readmeimages/img_3.png)
-7. To run, select Build with parameters -> Choose Profile -> Click build
-![img_4.png](readmeimages/img_4.png)
-8. View the results in the console output.
-![img_5.png](readmeimages/img_5.png)
-
-
-##Command to run the docker container
-
-1. Make sure to have the selenium grid or selenoid grid up and running
-2. Find cwd
-
-`$current = $PWD -replace "\\", "/" -replace "C", "c"`
-
-3.Start selenoid container
-
-`docker run -d --name selenoid -p 4444:4444 -v //var/run/docker.sock:/var/run/docker.sock -v ${current}/config/:/etc/selenoid/:ro -v /c/Users/testi/selenoid/video/:/opt/selenoid/video/ -e OVERRIDE_VIDEO_OUTPUT_DIR=/c/Users/testi/selenoid/video/ aerokube/selenoid:latest-release`
-
-or 
-
-Start selenium standalone container or grid
-
-`docker run -d --rm --name selenium -p 4444:4444 --shm-size="2g" selenium/standalone-chrome:96.0`
-
-4. Start seleniod ui(only need to view live execution)
-
-`docker run --rm -d --name selenoid-ui --link selenoid -p 8090:8080 aerokube/selenoid-ui --selenoid-uri=http://selenoid:4444`
-
-5. Run the docker image with necessary parameters. (Remote URL can be any ip reachable to the container. All are optional parameters)
-
-`docker run --rm -e remoteurl=http://192.168.0.231:4444/wd/hub -e runmode=remote -e remotemode=selenoid amuthanqa/assignment:latest`
-
-6. Add the additional parameters to the jenkins build and execute shell or windows batch command
-
-![img11.png](readmeimages/img11.png)
-
-![img12.png](readmeimages/img12.png)
-
-![img10.png](readmeimages/img10.png)
-
-![img13.png](readmeimages/img13.png)
-
-![img14.png](readmeimages/img14.png)
-
-
-## Final Notes:
-
-1. I have not written any unit tests because all the methods are relatively small and static
-2. I have performed sonarlint analysis to check the code quality.
-3. Base image used in the dockerfile is customised from `maven:3.6.3-jdk-8` where the maven dependencies are downloaded and kept handy to avoid downloading maven dependencies during each run.
-
 ## Questions :
-
+Framework developed by Amuthansakthivel
 For any further clarification - please reach out to `mech.amuthansakthivel@gmail.com`
 
 

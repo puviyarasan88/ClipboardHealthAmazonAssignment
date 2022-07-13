@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="com.assignment.listeners.TestListener"/>
     </listeners>
-    <test verbose="2" thread-count="2" parallel="methods" name="C:/Users/testi/selenium-project/MasterAutomationFramework/AmazonAssignment">
+    <test verbose="1" thread-count="1" parallel="methods" name="C:/Users/testi/selenium-project/MasterAutomationFramework/AmazonAssignment">
         <classes>
             <class name="com.assignment.tests.CheckoutPageTests">
                 <methods>
